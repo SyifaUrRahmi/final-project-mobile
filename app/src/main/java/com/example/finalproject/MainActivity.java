@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         tb = findViewById(R.id.tb);
+        tb.setTitle("Movies");
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         MoviesFragment moviesFragment = new MoviesFragment();
@@ -36,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         }
         LinearLayout mv = findViewById(R.id.movies);
         mv.setOnClickListener(movies_ -> {
-//            MoviesFragment moviesFragment = new MoviesFragment();
             fragmentManager
                     .beginTransaction()
                     .replace(R.id.frame_container, moviesFragment,
@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         });
         LinearLayout ts = findViewById(R.id.ts);
         ts.setOnClickListener(tvshows_ -> {
+            tb.setTitle("TV Shows");
             TVShowsFragment tvShowsFragment = new TVShowsFragment();
             fragmentManager
                     .beginTransaction()
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         });
         LinearLayout fav = findViewById(R.id.fav);
         fav.setOnClickListener(fav_ -> {
+            tb.setTitle("Favorites");
             FavoritesFragment favoritesFragment = new FavoritesFragment();
             fragmentManager
                     .beginTransaction()
