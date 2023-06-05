@@ -7,11 +7,19 @@
     tools:context=".MainActivity">
 
     <Toolbar
+        android:id="@+id/tb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:titleTextColor="@color/white"
         android:title="Movies"
         android:background="@color/black"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/frame_container"
+        android:layout_below="@id/tb"
+        android:layout_above="@+id/navbar"
+        />
     <LinearLayout
         android:id="@+id/navbar"
         android:layout_width="match_parent"
@@ -22,6 +30,8 @@
         android:layout_alignParentBottom="true"
         android:padding="10dp">
         <LinearLayout
+            android:id="@+id/movies"
+            android:onClick="movies"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -39,6 +49,8 @@
                 android:textColor="@color/white"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/ts"
+            android:onClick="tv_shows"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -57,6 +69,8 @@
                 android:textColor="@color/white"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/fav"
+            android:onClick="favorites"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
