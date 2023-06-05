@@ -13,7 +13,7 @@ public class MovieResponse {
     private String waktu;
 
     @SerializedName("vote_average")
-    private String vote;
+    private Number vote;
 
     @SerializedName("overview")
     private String sinopsis;
@@ -36,7 +36,7 @@ public class MovieResponse {
         return waktu;
     }
 
-    public String getVote() {
+    public Number getVote() {
         return vote;
     }
 

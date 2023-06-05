@@ -37,7 +37,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         MovieResponse movieResponse = movieResponses.get(position);
         holder.tv_judul.setText(movieResponse.getJudul());
         holder.tv_tahun.setText(movieResponse.getWaktu());
-        String poster_path = "https://image.tmdb.org/t/p/w500/"+movieResponse.getPoster();
+        String poster_path = "https://image.tmdb.org/t/p/w500"+movieResponse.getPoster();
         Glide.with(holder.itemView.getContext())
                 .load(poster_path)
                 .apply(new RequestOptions().override(350,
