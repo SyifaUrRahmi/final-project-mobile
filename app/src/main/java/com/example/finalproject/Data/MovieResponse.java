@@ -1,8 +1,13 @@
 package com.example.finalproject.Data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
-public class MovieResponse {
+public class MovieResponse implements Parcelable {
     @SerializedName("id")
     private int id;
 
@@ -23,6 +28,27 @@ public class MovieResponse {
 
     @SerializedName("backdrop_path")
     private String backdrop;
+
+    protected MovieResponse(Parcel in) {
+        id = in.readInt();
+        judul = in.readString();
+        waktu = in.readString();
+        sinopsis = in.readString();
+        poster = in.readString();
+        backdrop = in.readString();
+    }
+
+    public static final Creator<MovieResponse> CREATOR = new Creator<MovieResponse>() {
+        @Override
+        public MovieResponse createFromParcel(Parcel in) {
+            return new MovieResponse(in);
+        }
+
+        @Override
+        public MovieResponse[] newArray(int size) {
+            return new MovieResponse[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -50,5 +76,20 @@ public class MovieResponse {
 
     public String getBackdrop() {
         return backdrop;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeString(judul);
+        parcel.writeString(waktu);
+        parcel.writeString(sinopsis);
+        parcel.writeString(poster);
+        parcel.writeString(backdrop);
     }
 }
