@@ -35,7 +35,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull MovieAdapter.ViewHolder holder, int position) {
         MovieResponse movieResponse = movieResponses.get(position);
-        holder.tv_judul.setText(movieResponse.getJudul());
+        String judul = movieResponse.getJudul();
+        String[] separated = judul.split("-");
+        holder.tv_judul.setText(separated[0]);
         holder.tv_tahun.setText(movieResponse.getWaktu());
         String poster_path = "https://image.tmdb.org/t/p/w500"+movieResponse.getPoster();
         Glide.with(holder.itemView.getContext())

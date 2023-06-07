@@ -24,15 +24,17 @@
                 android:layout_below="@+id/iv_gambar"
                 android:orientation="vertical">
                 <TextView
+                    android:paddingTop="7dp"
                     android:id="@+id/tv_judul"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:paddingHorizontal="20dp"
-                    android:text="Judul"/>
+                    android:text="Judul"
+                    android:maxLines="1"/>
                 <TextView
+                    android:padding="5dp"
                     android:id="@+id/tv_tahun"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
