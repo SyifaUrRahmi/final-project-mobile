@@ -31,7 +31,6 @@
             android:src="@drawable/baseline_refresh_24"
             android:onClick="rf"/>
     </LinearLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="10dp"
         android:id="@+id/rv_movie"

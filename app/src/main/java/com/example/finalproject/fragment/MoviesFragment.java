@@ -34,8 +34,6 @@ import retrofit2.Response;
 public class MoviesFragment extends Fragment {
     ProgressBar pb;
     List<MovieResponse> movieResponses;
-
-    MovieAdapter movieAdapter;
     LinearLayout ly_tes;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,27 +59,14 @@ public class MoviesFragment extends Fragment {
         client.enqueue(new Callback<DataResponseMovie>() {
             @Override
             public void onResponse(Call<DataResponseMovie> call, Response<DataResponseMovie> response) {
-                System.out.println("response2");
                 if (response.isSuccessful()){
-                    System.out.println("response1");
                     if (response.body() != null){
-                        System.out.println("response");
                         movieResponses = response.body().getmovie();
-                        ExecutorService executor = Executors.newSingleThreadExecutor();
-                        Handler handler = new Handler(Looper.getMainLooper());
-                        executor.execute(()->{
-                                handler.post(()->{
-                                    MovieAdapter adapter = new MovieAdapter(movieResponses);
-                                    rvMovie.setAdapter(adapter);
-                                    rvMovie.setVisibility(View.VISIBLE);
-                                    pb.setVisibility(View.GONE);
-                                });
-                        });
+                        MovieAdapter adapter = new MovieAdapter(movieResponses);
+                        rvMovie.setAdapter(adapter);
+                        rvMovie.setVisibility(View.VISIBLE);
+                        pb.setVisibility(View.GONE);
                     }
-//                    for (MovieResponse i: movieResponses) {
-//                        System.out.println(i.getJudul());
-//                    }
-//                }else {
                     if (response.body() != null) {
                         Log.e("MovieFragment", "onFailure: " + response.message());
                     }
