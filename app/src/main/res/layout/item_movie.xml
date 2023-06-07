@@ -15,7 +15,7 @@
             <ImageView
                 android:id="@+id/iv_gambar"
                 android:layout_width="200dp"
-                android:layout_height="250dp"
+                android:layout_height="230dp"
                 android:src="@drawable/bunga"
                 android:scaleType="centerCrop"/>
             <LinearLayout
@@ -32,6 +32,8 @@
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:text="Judul"
+                    android:paddingHorizontal="5dp"
+                    android:ellipsize="end"
                     android:maxLines="1"/>
                 <TextView
                     android:padding="5dp"
