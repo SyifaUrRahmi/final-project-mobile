@@ -1,9 +1,11 @@
 package com.example.finalproject.Adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.finalproject.Data.MovieResponse;
+import com.example.finalproject.DetailMovieActivity;
+import com.example.finalproject.MainActivity;
 import com.example.finalproject.R;
 import com.example.finalproject.fragment.MoviesFragment;
 
@@ -45,6 +49,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 .apply(new RequestOptions().override(350,
                         550))
                 .into(holder.iv_gambar);
+        holder.ly_movie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent toDetailMovie = new Intent(holder.itemView.getContext(), DetailMovieActivity.class);
+                holder.itemView.getContext().startActivity(toDetailMovie);
+            }
+        });
     }
 
     @Override
@@ -55,11 +66,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView iv_gambar;
         TextView tv_judul, tv_tahun;
+        LinearLayout ly_movie;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             iv_gambar = itemView.findViewById(R.id.iv_gambar);
             tv_judul = itemView.findViewById(R.id.tv_judul);
             tv_tahun = itemView.findViewById(R.id.tv_tahun);
+            ly_movie = itemView.findViewById(R.id.movie);
         }
     }
 }
