@@ -6,12 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Toolbar
+    <TextView
         android:id="@+id/tb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:titleTextColor="@color/white"
-        android:title="Movies"
+        android:textColor="@color/white"
+        android:text="Movies"
+        android:textSize="25dp"
+        android:padding="15dp"
         android:background="#0DB4FF"/>
     <FrameLayout
         android:layout_width="match_parent"
@@ -25,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="#0DB4FF"
+        android:background="#6FCFFA"
         android:gravity="center"
         android:layout_alignParentBottom="true"
         android:padding="10dp">

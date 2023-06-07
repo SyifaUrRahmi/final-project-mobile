@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.example.finalproject.fragment.FavoritesFragment;
@@ -15,14 +16,13 @@ import com.example.finalproject.fragment.TVShowsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Toolbar tb;
+    private TextView tb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         tb = findViewById(R.id.tb);
-        tb.setTitle("Movies");
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         MoviesFragment moviesFragment = new MoviesFragment();
@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         }
         LinearLayout mv = findViewById(R.id.movies);
         mv.setOnClickListener(movies_ -> {
+            tb.setText("Movies");
             fragmentManager
                     .beginTransaction()
                     .replace(R.id.frame_container, moviesFragment,
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         });
         LinearLayout ts = findViewById(R.id.ts);
         ts.setOnClickListener(tvshows_ -> {
-            tb.setTitle("TV Shows");
+            tb.setText("TV Shows");
             TVShowsFragment tvShowsFragment = new TVShowsFragment();
             fragmentManager
                     .beginTransaction()
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         });
         LinearLayout fav = findViewById(R.id.fav);
         fav.setOnClickListener(fav_ -> {
-            tb.setTitle("Favorites");
+            tb.setText("Favorites");
             FavoritesFragment favoritesFragment = new FavoritesFragment();
             fragmentManager
                     .beginTransaction()
