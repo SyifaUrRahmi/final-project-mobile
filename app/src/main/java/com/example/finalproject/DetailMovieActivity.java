@@ -41,6 +41,7 @@ public class DetailMovieActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
                         MovieResponse movieResponse = response.body().getMovie();
+                        System.out.println("test"+movieResponse);
                         judul.setText(movieResponse.getJudul());
                     }
                 }
