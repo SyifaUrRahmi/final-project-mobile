@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 public class DetailMovieActivity extends AppCompatActivity {
     ImageView back, poster;
     TextView judul, sinopsis, vote, release;
@@ -38,10 +41,18 @@ public class DetailMovieActivity extends AppCompatActivity {
         String d_poster = getIntent().getStringExtra(EXTRA_POSTER);
         String d_vote = getIntent().getStringExtra(EXTRA_VOTE);
         String d_release = getIntent().getStringExtra(EXTRA_RELEASE);
+
+        SimpleDateFormat awal = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat akhir = new SimpleDateFormat("MMMM dd, yyyy");
+
         judul.setText(d_judul);
         sinopsis.setText(d_sinopsis);
         vote.setText(d_vote);
-        release.setText(d_release);
+        try {
+            release.setText(akhir.format(awal.parse(d_release)));
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
         Glide.with(DetailMovieActivity.this)
                 .load(d_back)
                 .into(back);

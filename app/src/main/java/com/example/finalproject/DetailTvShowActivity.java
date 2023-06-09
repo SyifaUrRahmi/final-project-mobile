@@ -8,6 +8,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 public class DetailTvShowActivity extends AppCompatActivity {
     ImageView back, poster;
     TextView judul, sinopsis, vote, release;
@@ -38,6 +41,9 @@ public class DetailTvShowActivity extends AppCompatActivity {
         String d_vote = getIntent().getStringExtra(EXTRA_VOTE);
         String d_release = getIntent().getStringExtra(EXTRA_RELEASE);
 
+        SimpleDateFormat awal = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat akhir = new SimpleDateFormat("MMMM dd, yyyy");
+
         if (d_sinopsis.length() > 0){
             sinopsis.setText(d_sinopsis);
         }else {
@@ -45,7 +51,11 @@ public class DetailTvShowActivity extends AppCompatActivity {
         }
         judul.setText(d_judul);
         vote.setText(d_vote);
-        release.setText(d_release);
+        try {
+            release.setText(akhir.format(awal.parse(d_release)));
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
         Glide.with(DetailTvShowActivity.this)
                 .load(d_back)
                 .into(back);
