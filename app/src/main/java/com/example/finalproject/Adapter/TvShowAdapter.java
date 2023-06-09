@@ -13,10 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.finalproject.Data.MovieResponse;
 import com.example.finalproject.Data.TvShowResponse;
-import com.example.finalproject.DetailMovieActivity;
-import com.example.finalproject.DetailTvShowActivity;
+import com.example.finalproject.DetailActivity;
 import com.example.finalproject.R;
 
 import java.util.List;
@@ -39,6 +37,7 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull TvShowAdapter.ViewHolder holder, int position) {
         TvShowResponse tvShowResponse = tvShowResponses.get(position);
+        String jenis = "TvShow";
         String judul = tvShowResponse.getJudul();
         String release = tvShowResponse.getWaktu();
         String overview = tvShowResponse.getSinopsis();
@@ -56,14 +55,15 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.ViewHolder
         holder.ly_tvshow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent toDetailTvShow = new Intent(holder.itemView.getContext(), DetailTvShowActivity.class);
-                toDetailTvShow.putExtra(DetailMovieActivity.EXTRA_JUDUL, judul);
-                toDetailTvShow.putExtra(DetailMovieActivity.EXTRA_BACK, backdrop);
-                toDetailTvShow.putExtra(DetailMovieActivity.EXTRA_OVERVIEW, overview);
-                toDetailTvShow.putExtra(DetailMovieActivity.EXTRA_RELEASE, release);
-                toDetailTvShow.putExtra(DetailMovieActivity.EXTRA_POSTER, poster_path);
-                toDetailTvShow.putExtra(DetailMovieActivity.EXTRA_VOTE, vote);
-                holder.itemView.getContext().startActivity(toDetailTvShow);
+                Intent toDetailMovie = new Intent(holder.itemView.getContext(), DetailActivity.class);
+                toDetailMovie.putExtra(DetailActivity.EXTRA_JENIS, jenis);
+                toDetailMovie.putExtra(DetailActivity.EXTRA_JUDUL, judul);
+                toDetailMovie.putExtra(DetailActivity.EXTRA_BACK, backdrop);
+                toDetailMovie.putExtra(DetailActivity.EXTRA_OVERVIEW, overview);
+                toDetailMovie.putExtra(DetailActivity.EXTRA_RELEASE, release);
+                toDetailMovie.putExtra(DetailActivity.EXTRA_POSTER, poster_path);
+                toDetailMovie.putExtra(DetailActivity.EXTRA_VOTE, vote);
+                holder.itemView.getContext().startActivity(toDetailMovie);
             }
         });
     }

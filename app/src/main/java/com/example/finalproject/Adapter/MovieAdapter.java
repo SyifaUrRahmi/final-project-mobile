@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.finalproject.Data.MovieResponse;
-import com.example.finalproject.DetailMovieActivity;
+import com.example.finalproject.DetailActivity;
 import com.example.finalproject.R;
 
 import java.util.List;
@@ -37,6 +37,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull MovieAdapter.ViewHolder holder, int position) {
         MovieResponse movieResponse = movieResponses.get(position);
+        String jenis = "movie";
         String judul = movieResponse.getJudul();
         String release = movieResponse.getWaktu();
         String overview = movieResponse.getSinopsis();
@@ -51,17 +52,18 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 .apply(new RequestOptions().override(350,
                         550))
                 .into(holder.iv_gambar);
-        holder.ly_movie.setOnClickListener(new View.OnClickListener() {
+        holder.ly_movie_tvshow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent toDetailMovie = new Intent(holder.itemView.getContext(), DetailMovieActivity.class);
-                toDetailMovie.putExtra(DetailMovieActivity.EXTRA_JUDUL, judul);
-                toDetailMovie.putExtra(DetailMovieActivity.EXTRA_BACK, backdrop);
-                toDetailMovie.putExtra(DetailMovieActivity.EXTRA_OVERVIEW, overview);
-                toDetailMovie.putExtra(DetailMovieActivity.EXTRA_RELEASE, release);
-                toDetailMovie.putExtra(DetailMovieActivity.EXTRA_POSTER, poster_path);
-                toDetailMovie.putExtra(DetailMovieActivity.EXTRA_VOTE, vote);
-                holder.itemView.getContext().startActivity(toDetailMovie);
+                Intent toDetail = new Intent(holder.itemView.getContext(), DetailActivity.class);
+                toDetail.putExtra(DetailActivity.EXTRA_JENIS, jenis);
+                toDetail.putExtra(DetailActivity.EXTRA_JUDUL, judul);
+                toDetail.putExtra(DetailActivity.EXTRA_BACK, backdrop);
+                toDetail.putExtra(DetailActivity.EXTRA_OVERVIEW, overview);
+                toDetail.putExtra(DetailActivity.EXTRA_RELEASE, release);
+                toDetail.putExtra(DetailActivity.EXTRA_POSTER, poster_path);
+                toDetail.putExtra(DetailActivity.EXTRA_VOTE, vote);
+                holder.itemView.getContext().startActivity(toDetail);
             }
         });
     }
@@ -74,13 +76,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView iv_gambar;
         TextView tv_judul, tv_tahun;
-        LinearLayout ly_movie;
+        LinearLayout ly_movie_tvshow;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             iv_gambar = itemView.findViewById(R.id.iv_gambar);
             tv_judul = itemView.findViewById(R.id.tv_judul);
             tv_tahun = itemView.findViewById(R.id.tv_tahun);
-            ly_movie = itemView.findViewById(R.id.movie_tvshow);
+            ly_movie_tvshow = itemView.findViewById(R.id.movie_tvshow);
         }
     }
 }
