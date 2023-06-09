@@ -37,8 +37,13 @@ public class DetailTvShowActivity extends AppCompatActivity {
         String d_poster = getIntent().getStringExtra(EXTRA_POSTER);
         String d_vote = getIntent().getStringExtra(EXTRA_VOTE);
         String d_release = getIntent().getStringExtra(EXTRA_RELEASE);
+
+        if (d_sinopsis.length() > 0){
+            sinopsis.setText(d_sinopsis);
+        }else {
+            sinopsis.setText("-");
+        }
         judul.setText(d_judul);
-        sinopsis.setText(d_sinopsis);
         vote.setText(d_vote);
         release.setText(d_release);
         Glide.with(DetailTvShowActivity.this)
