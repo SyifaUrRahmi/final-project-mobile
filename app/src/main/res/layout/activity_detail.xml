@@ -95,4 +95,26 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black"/>
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+        <ImageView
+            android:background="@drawable/bg_lingkaran"
+            android:id="@+id/kembali"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_arrow_back_24"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end">
+            <ImageView
+                android:background="@drawable/bg_lingkaran"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_favorite_border_24"/>
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

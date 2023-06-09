@@ -13,7 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class DetailActivity extends AppCompatActivity {
-    ImageView back, poster, jenis;
+    ImageView back, poster, jenis, kembali;
     TextView judul, sinopsis, vote, release;
 
     public static final String EXTRA_JENIS = "extra_jenis";
@@ -35,8 +35,12 @@ public class DetailActivity extends AppCompatActivity {
         sinopsis = findViewById(R.id.sinopsis);
         vote = findViewById(R.id.rating);
         release = findViewById(R.id.tanggal);
-
+        kembali = findViewById(R.id.kembali);
         jenis = findViewById(R.id.jenis);
+
+        kembali.setOnClickListener(view -> {
+            finish();
+        });
 
         String d_jenis = getIntent().getStringExtra(EXTRA_JENIS);
         String d_judul = getIntent().getStringExtra(EXTRA_JUDUL);
