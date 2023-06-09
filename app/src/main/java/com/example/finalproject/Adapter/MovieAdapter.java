@@ -37,12 +37,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull MovieAdapter.ViewHolder holder, int position) {
         MovieResponse movieResponse = movieResponses.get(position);
-        String id = String.valueOf(movieResponse.getId());
         String judul = movieResponse.getJudul();
-        String tahun = movieResponse.getWaktu();
-        String[] separated = tahun.split("-");
+        String release = movieResponse.getWaktu();
+        String overview = movieResponse.getSinopsis();
+        String vote = String.valueOf(movieResponse.getVote());
+        String backdrop = "https://image.tmdb.org/t/p/w500"+movieResponse.getBackdrop();
+        String[] tahun = release.split("-");
         holder.tv_judul.setText(movieResponse.getJudul());
-        holder.tv_tahun.setText(separated[0]);
+        holder.tv_tahun.setText(tahun[0]);
         String poster_path = "https://image.tmdb.org/t/p/w500"+movieResponse.getPoster();
         Glide.with(holder.itemView.getContext())
                 .load(poster_path)
@@ -54,6 +56,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             public void onClick(View view) {
                 Intent toDetailMovie = new Intent(holder.itemView.getContext(), DetailMovieActivity.class);
                 toDetailMovie.putExtra(DetailMovieActivity.EXTRA_JUDUL, judul);
+                toDetailMovie.putExtra(DetailMovieActivity.EXTRA_BACK, backdrop);
+                toDetailMovie.putExtra(DetailMovieActivity.EXTRA_OVERVIEW, overview);
+                toDetailMovie.putExtra(DetailMovieActivity.EXTRA_RELEASE, release);
+                toDetailMovie.putExtra(DetailMovieActivity.EXTRA_POSTER, poster_path);
+                toDetailMovie.putExtra(DetailMovieActivity.EXTRA_VOTE, vote);
                 holder.itemView.getContext().startActivity(toDetailMovie);
             }
         });
