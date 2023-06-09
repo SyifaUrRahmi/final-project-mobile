@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -13,9 +14,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class DetailActivity extends AppCompatActivity {
-    ImageView back, poster, jenis, kembali;
+    ImageView back, poster, jenis, kembali, fav;
     TextView judul, sinopsis, vote, release;
 
+    private boolean isFavorit = false;
     public static final String EXTRA_JENIS = "extra_jenis";
     public static final String EXTRA_JUDUL = "extra_judul";
     public static final String EXTRA_RELEASE = "extra_release";
@@ -37,10 +39,7 @@ public class DetailActivity extends AppCompatActivity {
         release = findViewById(R.id.tanggal);
         kembali = findViewById(R.id.kembali);
         jenis = findViewById(R.id.jenis);
-
-        kembali.setOnClickListener(view -> {
-            finish();
-        });
+        fav = findViewById(R.id.fav);
 
         String d_jenis = getIntent().getStringExtra(EXTRA_JENIS);
         String d_judul = getIntent().getStringExtra(EXTRA_JUDUL);
@@ -77,6 +76,18 @@ public class DetailActivity extends AppCompatActivity {
         Glide.with(DetailActivity.this)
                 .load(d_poster)
                 .into(poster);
-
+        kembali.setOnClickListener(view -> {
+            finish();
+        });
+        fav.setOnClickListener(view -> {
+            isFavorit = !isFavorit;
+            if (isFavorit == true){
+                Toast.makeText(this, "Berhasil Menambahkan " + d_judul +  " ke Favorite", Toast.LENGTH_SHORT).show();
+                fav.setImageDrawable(getResources().getDrawable(R.drawable.baseline_favorite_24));
+            }else {
+                Toast.makeText(this, "Berhasil Menghapus "+ d_judul + " dari Favorite", Toast.LENGTH_SHORT).show();
+                fav.setImageDrawable(getResources().getDrawable(R.drawable.baseline_favorite_border_24));
+            }
+        });
     }
 }

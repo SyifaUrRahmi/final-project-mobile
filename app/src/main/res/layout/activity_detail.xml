@@ -111,6 +111,7 @@
             android:layout_height="wrap_content"
             android:gravity="end">
             <ImageView
+                android:id="@+id/fav"
                 android:background="@drawable/bg_lingkaran"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
