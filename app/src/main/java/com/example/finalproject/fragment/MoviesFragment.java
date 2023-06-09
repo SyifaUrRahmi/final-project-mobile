@@ -8,8 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,13 +17,11 @@ import android.widget.ProgressBar;
 
 import com.example.finalproject.API.ApiConfig;
 import com.example.finalproject.Adapter.MovieAdapter;
-import com.example.finalproject.Data.DataResponseMovie;
-import com.example.finalproject.Data.MovieResponse;
+import com.example.finalproject.Data_API.DataResponseMovie;
+import com.example.finalproject.Data_API.MovieResponse;
 import com.example.finalproject.R;
 
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import retrofit2.Call;
 import retrofit2.Callback;

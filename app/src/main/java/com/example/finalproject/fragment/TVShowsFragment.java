@@ -17,9 +17,8 @@ import android.widget.ProgressBar;
 
 import com.example.finalproject.API.ApiConfig;
 import com.example.finalproject.Adapter.TvShowAdapter;
-import com.example.finalproject.Data.DataResponseTvShow;
-import com.example.finalproject.Data.MovieResponse;
-import com.example.finalproject.Data.TvShowResponse;
+import com.example.finalproject.Data_API.DataResponseTvShow;
+import com.example.finalproject.Data_API.TvShowResponse;
 import com.example.finalproject.R;
 
 import java.util.List;

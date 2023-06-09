@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.finalproject.Data.MovieResponse;
+import com.example.finalproject.Data_API.MovieResponse;
 import com.example.finalproject.DetailActivity;
 import com.example.finalproject.R;
 

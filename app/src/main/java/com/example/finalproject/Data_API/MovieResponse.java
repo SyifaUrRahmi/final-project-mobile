@@ -1,9 +1,4 @@
-package com.example.finalproject.Data;
-
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import androidx.annotation.NonNull;
+package com.example.finalproject.Data_API;
 
 import com.google.gson.annotations.SerializedName;
 

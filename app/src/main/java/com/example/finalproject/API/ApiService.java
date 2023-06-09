@@ -1,11 +1,10 @@
 package com.example.finalproject.API;
 
-import com.example.finalproject.Data.DataResponseMovie;
-import com.example.finalproject.Data.DataResponseTvShow;
+import com.example.finalproject.Data_API.DataResponseMovie;
+import com.example.finalproject.Data_API.DataResponseTvShow;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiService {
