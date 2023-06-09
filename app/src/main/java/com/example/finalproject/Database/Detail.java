@@ -9,7 +9,7 @@ public class Detail implements Parcelable {
     private String judul, waktu, sinopsis, poster, backdrop, jenis;
     private Number vote;
 
-    public Detail(String judul, String waktu, String sinopsis, String poster, String backdrop, String jenis, Number vote) {
+    public Detail(int id, String judul, String waktu, String sinopsis, String poster, String backdrop, String jenis, Number vote) {
         this.judul = judul;
         this.waktu = waktu;
         this.sinopsis = sinopsis;
