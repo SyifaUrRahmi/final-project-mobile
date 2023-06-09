@@ -38,6 +38,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull MovieAdapter.ViewHolder holder, int position) {
         MovieResponse movieResponse = movieResponses.get(position);
         String id = String.valueOf(movieResponse.getId());
+        String judul = movieResponse.getJudul();
         String tahun = movieResponse.getWaktu();
         String[] separated = tahun.split("-");
         holder.tv_judul.setText(movieResponse.getJudul());
@@ -52,7 +53,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             @Override
             public void onClick(View view) {
                 Intent toDetailMovie = new Intent(holder.itemView.getContext(), DetailMovieActivity.class);
-                toDetailMovie.putExtra(DetailMovieActivity.EXTRA_ID, id);
+                toDetailMovie.putExtra(DetailMovieActivity.EXTRA_JUDUL, judul);
                 holder.itemView.getContext().startActivity(toDetailMovie);
             }
         });
