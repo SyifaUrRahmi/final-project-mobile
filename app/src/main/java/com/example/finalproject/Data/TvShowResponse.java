@@ -18,7 +18,7 @@ public class TvShowResponse implements Parcelable {
     private String waktu;
 
     @SerializedName("vote_average")
-    private Integer vote;
+    private Number vote;
 
     @SerializedName("overview")
     private String sinopsis;
@@ -67,7 +67,7 @@ public class TvShowResponse implements Parcelable {
         return waktu;
     }
 
-    public Integer getVote() {
+    public Number getVote() {
         return vote;
     }
 
@@ -97,7 +97,6 @@ public class TvShowResponse implements Parcelable {
             parcel.writeByte((byte) 0);
         } else {
             parcel.writeByte((byte) 1);
-            parcel.writeInt(vote);
         }
         parcel.writeString(sinopsis);
         parcel.writeString(poster);
