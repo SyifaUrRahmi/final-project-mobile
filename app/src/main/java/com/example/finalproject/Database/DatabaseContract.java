@@ -11,5 +11,6 @@ public class DatabaseContract {
         public static String SINOPSIS = "sinopsis";
         public static String POSTER = "poster";
         public static String BACKDROP = "backdrop";
+        public static Integer VOTE = 0;
     }
 }
