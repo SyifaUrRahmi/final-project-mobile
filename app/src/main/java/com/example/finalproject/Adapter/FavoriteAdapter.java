@@ -56,6 +56,12 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
                 .apply(new RequestOptions().override(350,
                         550))
                 .into(holder.post);
+        holder.rating.setText(vote);
+        if(jenis.equals("movie")){
+            holder.jenis.setImageResource(R.drawable.baseline_movie_creation_24);
+        } else {
+            holder.jenis.setImageResource(R.drawable.baseline_tv_24);
+        }
         holder.cv_fav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,7 +86,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView post, jenis;
-        TextView jud, release;
+        TextView jud, release, rating;
         CardView cv_fav;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -89,6 +95,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
             jud = itemView.findViewById(R.id.jud);
             release = itemView.findViewById(R.id.release);
             cv_fav = itemView.findViewById(R.id.cv_fav);
+            rating = itemView.findViewById(R.id.rating);
         }
     }
 }

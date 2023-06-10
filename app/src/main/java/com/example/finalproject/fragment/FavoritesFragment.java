@@ -15,6 +15,8 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.finalproject.Adapter.FavoriteAdapter;
 import com.example.finalproject.Database.Detail;
@@ -22,8 +24,11 @@ import com.example.finalproject.Database.DetailHelper;
 import com.example.finalproject.Database.MappingHelper;
 import com.example.finalproject.R;
 
+import org.w3c.dom.Text;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -31,6 +36,8 @@ public class FavoritesFragment extends Fragment {
 
     ArrayList<Detail> details = new ArrayList<>();
     RecyclerView rvFavorite;
+    ArrayList<Detail> detail;
+    TextView belum_ada;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,10 +53,15 @@ public class FavoritesFragment extends Fragment {
         rvFavorite = view.findViewById(R.id.rv_fav);
         rvFavorite.setHasFixedSize(true);
 
-        new LoadNotesAsync(getContext(), details -> {
-            showCurrentDetail(details);
-        }).execute();
+        belum_ada = view.findViewById(R.id.belum_ada);
 
+        new LoadNotesAsync(getContext(), details -> {
+            if (details != null){
+                showCurrentDetail(details);
+            } else {
+                belum_ada.setVisibility(View.VISIBLE);
+            }
+        }).execute();
 
     }
 
@@ -58,6 +70,7 @@ public class FavoritesFragment extends Fragment {
         if (details != null) {
             FavoriteAdapter adapter = new FavoriteAdapter(details);
             rvFavorite.setAdapter(adapter);
+            belum_ada.setVisibility(View.GONE);
         }
     }
 
