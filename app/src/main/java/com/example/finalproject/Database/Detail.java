@@ -126,5 +126,6 @@ public class Detail implements Parcelable {
         parcel.writeString(poster);
         parcel.writeString(backdrop);
         parcel.writeString(jenis);
+        parcel.writeString(vote);
     }
 }
