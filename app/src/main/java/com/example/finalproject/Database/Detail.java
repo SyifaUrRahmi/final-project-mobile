@@ -6,10 +6,12 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 public class Detail implements Parcelable {
-    private String judul, waktu, sinopsis, poster, backdrop, jenis;
-    private Number vote;
+    private String judul, waktu, sinopsis, poster, backdrop, jenis, vote;
+//    private Number vote;
+    private int id;
 
-    public Detail(int id, String judul, String waktu, String sinopsis, String poster, String backdrop, String jenis, Number vote) {
+    public Detail(int id, String judul, String waktu, String sinopsis, String poster, String backdrop, String jenis, String vote) {
+        this.id = id;
         this.judul = judul;
         this.waktu = waktu;
         this.sinopsis = sinopsis;
@@ -20,12 +22,14 @@ public class Detail implements Parcelable {
     }
 
     protected Detail(Parcel in) {
+        id = in.readInt();
         judul = in.readString();
         waktu = in.readString();
         sinopsis = in.readString();
         poster = in.readString();
         backdrop = in.readString();
         jenis = in.readString();
+        vote = in.readString();
     }
 
     public static final Creator<Detail> CREATOR = new Creator<Detail>() {
@@ -80,11 +84,11 @@ public class Detail implements Parcelable {
         this.backdrop = backdrop;
     }
 
-    public Number getVote() {
+    public String getVote() {
         return vote;
     }
 
-    public void setVote(Number vote) {
+    public void setVote(String vote) {
         this.vote = vote;
     }
 
@@ -96,6 +100,14 @@ public class Detail implements Parcelable {
         this.jenis = jenis;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -103,6 +115,7 @@ public class Detail implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeInt(id);
         parcel.writeString(judul);
         parcel.writeString(waktu);
         parcel.writeString(sinopsis);

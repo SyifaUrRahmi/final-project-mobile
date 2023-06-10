@@ -22,8 +22,8 @@ public class MappingHelper {
                     cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.DetailColumns.POSTER));
             String backdrop =
                     cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.DetailColumns.BACKDROP));
-            int vote =
-                    cursor.getInt(cursor.getColumnIndexOrThrow(String.valueOf(DatabaseContract.DetailColumns.VOTE)));
+            String vote =
+                    cursor.getString(cursor.getColumnIndexOrThrow(String.valueOf(DatabaseContract.DetailColumns.VOTE)));
             details.add(new Detail(id, jenis, judul, waktu, sinopsis, poster, backdrop, vote));
         }
         return details;
