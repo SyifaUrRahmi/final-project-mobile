@@ -10,6 +10,10 @@ public class Detail implements Parcelable {
 //    private Number vote;
     private int id;
 
+    public Detail() {
+
+    }
+
     public Detail(int id, String judul, String waktu, String sinopsis, String poster, String backdrop, String jenis, String vote) {
         this.id = id;
         this.judul = judul;

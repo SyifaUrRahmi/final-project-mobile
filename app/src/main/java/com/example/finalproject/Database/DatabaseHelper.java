@@ -15,12 +15,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     "CREATE TABLE %s"
                             + " (%s INTEGER PRIMARY KEY AUTOINCREMENT,"
                             + " %s TEXT NOT NULL,"
-                            + " %s TEXT,"
-                            + " %s TEXT,"
                             + " %s TEXT NOT NULL,"
                             + " %s TEXT NOT NULL,"
                             + " %s TEXT NOT NULL,"
-                            + " %s INTEGER)",
+                            + " %s TEXT NOT NULL,"
+                            + " %s TEXT NOT NULL,"
+                            + " %s TEXT NOT NULL)",
                     DatabaseContract.TABLE_NAME,
                     DatabaseContract.DetailColumns._ID,
                     DatabaseContract.DetailColumns.JENIS,
@@ -30,7 +30,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     DatabaseContract.DetailColumns.POSTER,
                     DatabaseContract.DetailColumns.BACKDROP,
                     DatabaseContract.DetailColumns.VOTE
-
             );
 
 

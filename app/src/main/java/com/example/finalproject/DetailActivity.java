@@ -43,9 +43,6 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        detailHelper = DetailHelper.getInstance(getApplicationContext());
-        detailHelper.open();
-
         back = findViewById(R.id.back);
         poster = findViewById(R.id.poster);
         judul = findViewById(R.id.judul);
@@ -55,6 +52,8 @@ public class DetailActivity extends AppCompatActivity {
         kembali = findViewById(R.id.kembali);
         jenis = findViewById(R.id.jenis);
         fav = findViewById(R.id.fav);
+
+        detail = getIntent().getParcelableExtra(EXTRA_DETAIL);
 
         String d_jenis = getIntent().getStringExtra(EXTRA_JENIS);
         String d_judul = getIntent().getStringExtra(EXTRA_JUDUL);
@@ -100,7 +99,15 @@ public class DetailActivity extends AppCompatActivity {
                 Toast.makeText(this, "Berhasil Menambahkan " + d_judul +  " ke Favorite", Toast.LENGTH_SHORT).show();
                 fav.setImageDrawable(getResources().getDrawable(R.drawable.baseline_favorite_24));
 
-                detail.setJenis(d_jenis);
+                if (d_jenis.equals("movie")){
+                    detail.setJenis("movie");
+                }else {
+                    detail.setJenis("tvshow");
+                }
+
+                if (detail == null) {
+                    detail = new Detail();
+                }
                 detail.setJudul(d_judul);
                 detail.setSinopsis(d_sinopsis);
                 detail.setWaktu(d_release);
@@ -119,6 +126,8 @@ public class DetailActivity extends AppCompatActivity {
                 values.put(DatabaseContract.DetailColumns.POSTER, d_poster);
                 values.put(DatabaseContract.DetailColumns.BACKDROP, d_back);
                 values.put(String.valueOf(DatabaseContract.DetailColumns.VOTE), vote_);
+                detailHelper = DetailHelper.getInstance(getApplicationContext());
+                detailHelper.open();
                 long result = detailHelper.insert(values);
                 if (result > 0) {
                     detail.setId((int) result);
