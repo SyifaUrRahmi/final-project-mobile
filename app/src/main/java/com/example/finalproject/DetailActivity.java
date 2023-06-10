@@ -113,7 +113,7 @@ public class DetailActivity extends AppCompatActivity {
 
                 detail.setJudul(d_judul);
                 detail.setSinopsis(d_sinopsis);
-                detail.setWaktu(String.valueOf(release));
+                detail.setWaktu(d_release);
                 detail.setPoster(d_poster);
                 detail.setBackdrop(d_back);
                 detail.setVote(d_vote);
@@ -124,11 +124,11 @@ public class DetailActivity extends AppCompatActivity {
                 ContentValues values = new ContentValues();
                 values.put(DatabaseContract.DetailColumns.JENIS, d_jenis);
                 values.put(DatabaseContract.DetailColumns.JUDUL, d_judul);
-                values.put(DatabaseContract.DetailColumns.WAKTU, String.valueOf(release));
+                values.put(DatabaseContract.DetailColumns.WAKTU, d_release);
                 values.put(DatabaseContract.DetailColumns.SINOPSIS, d_sinopsis);
                 values.put(DatabaseContract.DetailColumns.POSTER, d_poster);
                 values.put(DatabaseContract.DetailColumns.BACKDROP, d_back);
-                values.put(String.valueOf(DatabaseContract.DetailColumns.VOTE), vote_);
+                values.put(String.valueOf(DatabaseContract.DetailColumns.VOTE), d_vote);
 
                 long result = detailHelper.insert(values);
                 if (result > 0) {
