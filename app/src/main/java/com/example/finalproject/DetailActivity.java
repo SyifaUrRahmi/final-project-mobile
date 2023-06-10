@@ -13,16 +13,17 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.finalproject.Data_API.MovieResponse;
 import com.example.finalproject.Database.DatabaseContract;
+import com.example.finalproject.Database.DatabaseHelper;
 import com.example.finalproject.Database.Detail;
 import com.example.finalproject.Database.DetailHelper;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 public class DetailActivity extends AppCompatActivity {
     ImageView back, poster, jenis, kembali, fav;
     TextView judul, sinopsis, vote, release;
-
     private boolean isFavorit = false;
     public static final String EXTRA_JENIS = "extra_jenis";
     public static final String EXTRA_JUDUL = "extra_judul";
@@ -32,13 +33,9 @@ public class DetailActivity extends AppCompatActivity {
     public static final String EXTRA_POSTER = "extra_poster";
     public static final String EXTRA_BACK = "extra_back";
 
-    public static final String EXTRA_DETAIL = "extra_detail";
-    public static final int RESULT_TAMBAH = 101;
-    public static final int RESULT_HAPUS = 301;
-
     private DetailHelper detailHelper;
     private Detail detail;
-//    MovieResponse movieResponse;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,15 +52,6 @@ public class DetailActivity extends AppCompatActivity {
         jenis = findViewById(R.id.jenis);
         fav = findViewById(R.id.fav);
 
-        detailHelper = DetailHelper.getInstance(getApplicationContext());
-        detailHelper.open();
-
-//        movieResponse = getIntent().getParcelableExtra(EXTRA_DETAIL);
-
-        if (detail == null) {
-            detail = new Detail();
-        }
-
         String d_jenis = getIntent().getStringExtra(EXTRA_JENIS);
         String d_judul = getIntent().getStringExtra(EXTRA_JUDUL);
         String d_sinopsis = getIntent().getStringExtra(EXTRA_OVERVIEW);
@@ -71,6 +59,16 @@ public class DetailActivity extends AppCompatActivity {
         String d_poster = getIntent().getStringExtra(EXTRA_POSTER);
         String d_vote = getIntent().getStringExtra(EXTRA_VOTE);
         String d_release = getIntent().getStringExtra(EXTRA_RELEASE);
+
+//        boolean hasil = DetailHelper.cari(String.valueOf(d_judul));
+//        isFavorit = hasil;
+
+        detailHelper = DetailHelper.getInstance(getApplicationContext());
+        detailHelper.open();
+
+        if (detail == null) {
+            detail = new Detail();
+        }
 
         SimpleDateFormat awal = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat akhir = new SimpleDateFormat("MMMM dd, yyyy");
@@ -117,9 +115,6 @@ public class DetailActivity extends AppCompatActivity {
                 detail.setPoster(d_poster);
                 detail.setBackdrop(d_back);
                 detail.setVote(d_vote);
-
-//                Intent intent = new Intent();
-//                intent.putExtra(EXTRA_DETAIL, detail);
 
                 ContentValues values = new ContentValues();
                 values.put(DatabaseContract.DetailColumns.JENIS, d_jenis);

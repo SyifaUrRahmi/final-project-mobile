@@ -6,6 +6,7 @@
     tools:context=".fragment.FavoritesFragment"
     android:orientation="vertical">
     <TextView
+        android:visibility="gone"
         android:id="@+id/belum_ada"
         android:layout_marginTop="350dp"
         android:layout_width="match_parent"
@@ -13,10 +14,10 @@
         android:gravity="center"
         android:textSize="18dp"
         android:textColor="@color/black"
-        android:visibility="gone"
         android:text="Anda belum menyukai film apapun"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_fav"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:listitem="@layout/item_favorite"/>

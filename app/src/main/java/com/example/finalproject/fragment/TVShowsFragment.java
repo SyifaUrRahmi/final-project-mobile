@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.finalproject.API.ApiConfig;
 import com.example.finalproject.Adapter.TvShowAdapter;
@@ -30,11 +31,10 @@ import retrofit2.Response;
 public class TVShowsFragment extends Fragment {
     ProgressBar pb;
     List<TvShowResponse> tvShowResponses;
-    LinearLayout ly_tes;
+    TextView test;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_t_v_shows, container, false);
     }
 
@@ -43,7 +43,7 @@ public class TVShowsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         pb = view.findViewById(R.id.pb);
-        ly_tes = view.findViewById(R.id.test);
+        test = view.findViewById(R.id.test);
         RecyclerView rvTvShow = view.findViewById(R.id.rv_tvshow);
         rvTvShow.setHasFixedSize(true);
         rvTvShow.setLayoutManager(new GridLayoutManager(getActivity(),2));
@@ -73,7 +73,7 @@ public class TVShowsFragment extends Fragment {
             public void onFailure(Call<DataResponseTvShow> call, Throwable t) {
                 pb.setVisibility(View.GONE);
                 rvTvShow.setVisibility(View.GONE);
-                ly_tes.setVisibility(View.VISIBLE);
+                test.setVisibility(View.VISIBLE);
                 Log.e("MainActivity", "onFailure: " + t.getMessage());
             }
         });

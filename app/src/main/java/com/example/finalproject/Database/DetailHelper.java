@@ -7,6 +7,8 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 public class DetailHelper {
     private static final String DATABASE_TABLE = DatabaseContract.TABLE_NAME;
     private static DatabaseHelper databaseHelper;
@@ -67,5 +69,18 @@ public class DetailHelper {
     public int deleteById(String id) {
         return database.delete(DATABASE_TABLE, DatabaseContract.DetailColumns._ID + " = "
                 + id, null);
+    }
+    public static boolean cari (String text){
+        SQLiteDatabase db = databaseHelper.getReadableDatabase();
+        String query = "SELECT * FROM " + DatabaseContract.TABLE_NAME + " WHERE " + DatabaseContract.DetailColumns.JUDUL + " LIKE '" + text + "%'";
+        Cursor cursor = db.rawQuery(query, null);
+        boolean hasil = false;
+        if (cursor != null && cursor.getCount() > 0) {
+            hasil = true;
+        }
+        if (cursor != null) {
+            cursor.close();
+        }
+        return hasil;
     }
 }

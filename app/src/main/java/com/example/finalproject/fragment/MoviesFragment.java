@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.finalproject.API.ApiConfig;
 import com.example.finalproject.Adapter.MovieAdapter;
@@ -30,7 +31,7 @@ import retrofit2.Response;
 public class MoviesFragment extends Fragment {
     ProgressBar pb;
     List<MovieResponse> movieResponses;
-    LinearLayout ly_tes;
+    TextView test;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class MoviesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         pb = view.findViewById(R.id.pb);
-        ly_tes = view.findViewById(R.id.test);
+        test = view.findViewById(R.id.test);
         RecyclerView rvMovie = view.findViewById(R.id.rv_movie);
         rvMovie.setHasFixedSize(true);
         rvMovie.setLayoutManager(new GridLayoutManager(getActivity(),2));
@@ -73,7 +74,7 @@ public class MoviesFragment extends Fragment {
             public void onFailure(Call<DataResponseMovie> call, Throwable t) {
                 pb.setVisibility(View.GONE);
                 rvMovie.setVisibility(View.GONE);
-                ly_tes.setVisibility(View.VISIBLE);
+                test.setVisibility(View.VISIBLE);
                 Log.e("MainActivity", "onFailure: " + t.getMessage());
             }
         });

@@ -11,27 +11,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="350dp"
         android:visibility="gone"/>
-    <LinearLayout
-        android:id="@+id/test"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone">
         <TextView
+            android:id="@+id/test"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="350dp"
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="18dp"
-            android:text="Please check your internet connection" />
-        <ImageView
-            android:layout_marginTop="7dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/baseline_refresh_24"
-            android:onClick="rf"/>
-    </LinearLayout>
+            android:text="Please check your internet connection"
+            android:visibility="gone"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_tvshow"
         android:layout_width="match_parent"

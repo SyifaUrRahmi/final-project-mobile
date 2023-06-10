@@ -55,22 +55,22 @@ public class FavoritesFragment extends Fragment {
 
         belum_ada = view.findViewById(R.id.belum_ada);
 
-        new LoadNotesAsync(getContext(), details -> {
-            if (details != null){
-                showCurrentDetail(details);
-            } else {
-                belum_ada.setVisibility(View.VISIBLE);
-            }
-        }).execute();
 
+        new LoadNotesAsync(getContext(), details -> {
+            showCurrentDetail(details);
+        }).execute();
     }
 
     private void showCurrentDetail(ArrayList<Detail> details) {
-        rvFavorite.setLayoutManager(new LinearLayoutManager(getContext()));
         if (details != null) {
+            rvFavorite.setVisibility(View.VISIBLE);
+            belum_ada.setVisibility(View.GONE);
+            rvFavorite.setLayoutManager(new LinearLayoutManager(getContext()));
             FavoriteAdapter adapter = new FavoriteAdapter(details);
             rvFavorite.setAdapter(adapter);
-            belum_ada.setVisibility(View.GONE);
+        } else {
+            belum_ada.setVisibility(View.VISIBLE);
+            rvFavorite.setVisibility(View.GONE);
         }
     }
 
