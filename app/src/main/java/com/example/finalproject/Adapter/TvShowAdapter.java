@@ -37,6 +37,7 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull TvShowAdapter.ViewHolder holder, int position) {
         TvShowResponse tvShowResponse = tvShowResponses.get(position);
+        String id_ = String.valueOf(tvShowResponse.getId());
         String jenis = "TvShow";
         String judul = tvShowResponse.getJudul();
         String release = tvShowResponse.getWaktu();
@@ -55,15 +56,16 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.ViewHolder
         holder.ly_tvshow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent toDetailMovie = new Intent(holder.itemView.getContext(), DetailActivity.class);
-                toDetailMovie.putExtra(DetailActivity.EXTRA_JENIS, jenis);
-                toDetailMovie.putExtra(DetailActivity.EXTRA_JUDUL, judul);
-                toDetailMovie.putExtra(DetailActivity.EXTRA_BACK, backdrop);
-                toDetailMovie.putExtra(DetailActivity.EXTRA_OVERVIEW, overview);
-                toDetailMovie.putExtra(DetailActivity.EXTRA_RELEASE, release);
-                toDetailMovie.putExtra(DetailActivity.EXTRA_POSTER, poster_path);
-                toDetailMovie.putExtra(DetailActivity.EXTRA_VOTE, vote);
-                holder.itemView.getContext().startActivity(toDetailMovie);
+                Intent toDetail = new Intent(holder.itemView.getContext(), DetailActivity.class);
+                toDetail.putExtra(DetailActivity.EXTRA_JENIS, jenis);
+                toDetail.putExtra(DetailActivity.EXTRA_JUDUL, judul);
+                toDetail.putExtra(DetailActivity.EXTRA_BACK, backdrop);
+                toDetail.putExtra(DetailActivity.EXTRA_OVERVIEW, overview);
+                toDetail.putExtra(DetailActivity.EXTRA_RELEASE, release);
+                toDetail.putExtra(DetailActivity.EXTRA_POSTER, poster_path);
+                toDetail.putExtra(DetailActivity.EXTRA_VOTE, vote);
+                toDetail.putExtra(DetailActivity.EXTRA_ID_, id_);
+                holder.itemView.getContext().startActivity(toDetail);
             }
         });
     }

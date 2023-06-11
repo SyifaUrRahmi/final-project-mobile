@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 public class Detail implements Parcelable {
-    private String judul, waktu, sinopsis, poster, backdrop, jenis, vote;
+    private String id_, judul, waktu, sinopsis, poster, backdrop, jenis, vote;
 //    private Number vote;
     private int id;
 
@@ -14,8 +14,17 @@ public class Detail implements Parcelable {
 
     }
 
-    public Detail(int id, String jenis, String judul, String waktu, String sinopsis, String poster, String backdrop, String vote) {
+    public String getId_() {
+        return id_;
+    }
+
+    public void setId_(String id_) {
+        this.id_ = id_;
+    }
+
+    public Detail(int id, String id_, String jenis, String judul, String waktu, String sinopsis, String poster, String backdrop, String vote) {
         this.id = id;
+        this.id_ = id_;
         this.judul = judul;
         this.waktu = waktu;
         this.sinopsis = sinopsis;
@@ -27,6 +36,7 @@ public class Detail implements Parcelable {
 
     protected Detail(Parcel in) {
         id = in.readInt();
+        id_ = in.readString();
         judul = in.readString();
         waktu = in.readString();
         sinopsis = in.readString();
@@ -104,7 +114,7 @@ public class Detail implements Parcelable {
         this.jenis = jenis;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -120,6 +130,7 @@ public class Detail implements Parcelable {
     @Override
     public void writeToParcel(@NonNull Parcel parcel, int i) {
         parcel.writeInt(id);
+        parcel.writeString(id_);
         parcel.writeString(judul);
         parcel.writeString(waktu);
         parcel.writeString(sinopsis);

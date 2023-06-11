@@ -38,6 +38,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull FavoriteAdapter.ViewHolder holder, int position) {
         Detail detail = details.get(position);
+        String id_ = detail.getId_();
         String jenis = detail.getJenis();
         String judul = detail.getJudul();
         String release = detail.getWaktu();
@@ -70,6 +71,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
                 toDetail.putExtra(DetailActivity.EXTRA_RELEASE, release);
                 toDetail.putExtra(DetailActivity.EXTRA_POSTER, poster);
                 toDetail.putExtra(DetailActivity.EXTRA_VOTE, vote);
+                toDetail.putExtra(DetailActivity.EXTRA_ID_, id_);
                 holder.itemView.getContext().startActivity(toDetail);
             }
         });

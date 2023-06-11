@@ -10,6 +10,8 @@ public class MappingHelper {
         while (cursor.moveToNext()) {
             int id =
                     cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseContract.DetailColumns._ID));
+            String id_ =
+                    cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.DetailColumns.ID_));
             String jenis =
                     cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.DetailColumns.JENIS));
             String judul =
@@ -24,7 +26,7 @@ public class MappingHelper {
                     cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.DetailColumns.BACKDROP));
             String vote =
                     cursor.getString(cursor.getColumnIndexOrThrow(String.valueOf(DatabaseContract.DetailColumns.VOTE)));
-            details.add(new Detail(id, jenis, judul, waktu, sinopsis, poster, backdrop, vote));
+            details.add(new Detail(id, id_, jenis, judul, waktu, sinopsis, poster, backdrop, vote));
         }
         return details;
     }

@@ -25,6 +25,8 @@ public class DetailActivity extends AppCompatActivity {
     ImageView back, poster, jenis, kembali, fav;
     TextView judul, sinopsis, vote, release;
     private boolean isFavorit = false;
+
+    public static final String EXTRA_ID_ = "extra_id_";
     public static final String EXTRA_JENIS = "extra_jenis";
     public static final String EXTRA_JUDUL = "extra_judul";
     public static final String EXTRA_RELEASE = "extra_release";
@@ -54,6 +56,7 @@ public class DetailActivity extends AppCompatActivity {
         jenis = findViewById(R.id.jenis);
         fav = findViewById(R.id.fav);
 
+        String d_id_ = getIntent().getStringExtra(EXTRA_ID_);
         String d_jenis = getIntent().getStringExtra(EXTRA_JENIS);
         String d_judul = getIntent().getStringExtra(EXTRA_JUDUL);
         String d_sinopsis = getIntent().getStringExtra(EXTRA_OVERVIEW);
@@ -61,10 +64,6 @@ public class DetailActivity extends AppCompatActivity {
         String d_poster = getIntent().getStringExtra(EXTRA_POSTER);
         String d_vote = getIntent().getStringExtra(EXTRA_VOTE);
         String d_release = getIntent().getStringExtra(EXTRA_RELEASE);
-
-        DetailHelper db = new DetailHelper(getApplicationContext());
-        isFavorit = db.isFav(d_judul);
-
 
         detailHelper = DetailHelper.getInstance(getApplicationContext());
         detailHelper.open();
@@ -102,9 +101,13 @@ public class DetailActivity extends AppCompatActivity {
                 .into(poster);
         kembali.setOnClickListener(view -> {
             Intent intent = new Intent();
-            finish();
             setResult(RESULT_OK, intent);
+            finish();
         });
+
+        DetailHelper db = new DetailHelper(getApplicationContext());
+        isFavorit = db.isFav(d_id_);
+
         if (isFavorit){
             fav.setImageDrawable(getResources().getDrawable(R.drawable.baseline_favorite_24));
         }else {
@@ -119,6 +122,7 @@ public class DetailActivity extends AppCompatActivity {
                     detail.setJenis("tvshow");
                 }
 
+                detail.setId_(d_id_);
                 detail.setJudul(d_judul);
                 detail.setSinopsis(d_sinopsis);
                 detail.setWaktu(d_release);
@@ -127,6 +131,7 @@ public class DetailActivity extends AppCompatActivity {
                 detail.setVote(d_vote);
 
                 ContentValues values = new ContentValues();
+                values.put(DatabaseContract.DetailColumns.ID_, d_id_);
                 values.put(DatabaseContract.DetailColumns.JENIS, d_jenis);
                 values.put(DatabaseContract.DetailColumns.JUDUL, d_judul);
                 values.put(DatabaseContract.DetailColumns.WAKTU, d_release);
@@ -144,7 +149,7 @@ public class DetailActivity extends AppCompatActivity {
                     Toast.makeText(this, "Gagal menambahkan data", Toast.LENGTH_SHORT).show();
                 }
             }else {
-                long result = detailHelper.deleteByJudul(d_judul);
+                long result = detailHelper.deleteById(d_id_);
                 if (result > 0){
                     Toast.makeText(this, "Berhasil Menghapus "+ d_judul + " dari Favorit", Toast.LENGTH_SHORT).show();
                     fav.setImageDrawable(getResources().getDrawable(R.drawable.baseline_favorite_border_24));
@@ -154,13 +159,5 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
     }
-
-//    private void setFav(boolean isFavorit) {
-//        if (isFavorit) {
-//            fav.setImageDrawable(getResources().getDrawable(R.drawable.baseline_favorite_24));
-//        }else {
-//            fav.setImageDrawable(getResources().getDrawable(R.drawable.baseline_favorite_border_24));
-//        }
-//    }
 
 }

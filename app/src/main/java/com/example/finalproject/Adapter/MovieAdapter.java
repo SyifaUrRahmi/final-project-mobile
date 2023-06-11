@@ -38,6 +38,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull MovieAdapter.ViewHolder holder, int position) {
         MovieResponse movieResponse = movieResponses.get(position);
+        String id_ = String.valueOf(movieResponse.getId());
         String jenis = "movie";
         String judul = movieResponse.getJudul();
         String release = movieResponse.getWaktu();
@@ -64,6 +65,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 toDetail.putExtra(DetailActivity.EXTRA_RELEASE, release);
                 toDetail.putExtra(DetailActivity.EXTRA_POSTER, poster_path);
                 toDetail.putExtra(DetailActivity.EXTRA_VOTE, vote);
+                toDetail.putExtra(DetailActivity.EXTRA_ID_, id_);
                 holder.itemView.getContext().startActivity(toDetail);
             }
         });

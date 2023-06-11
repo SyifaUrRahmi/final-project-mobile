@@ -20,9 +20,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                             + " %s TEXT NOT NULL,"
                             + " %s TEXT NOT NULL,"
                             + " %s TEXT NOT NULL,"
+                            + " %s TEXT NOT NULL,"
                             + " %s TEXT NOT NULL)",
                     DatabaseContract.TABLE_NAME,
                     DatabaseContract.DetailColumns._ID,
+                    DatabaseContract.DetailColumns.ID_,
                     DatabaseContract.DetailColumns.JENIS,
                     DatabaseContract.DetailColumns.JUDUL,
                     DatabaseContract.DetailColumns.WAKTU,
