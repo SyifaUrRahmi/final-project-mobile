@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +23,7 @@ import com.example.finalproject.Data_API.DataResponseMovie;
 import com.example.finalproject.Data_API.MovieResponse;
 import com.example.finalproject.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -32,6 +34,9 @@ public class MoviesFragment extends Fragment {
     ProgressBar pb;
     List<MovieResponse> movieResponses;
     TextView test;
+    SearchView searchView;
+
+    MovieAdapter movieAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -43,6 +48,8 @@ public class MoviesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        searchView = (SearchView) view.findViewById(R.id.cari_);
+        searchView.clearFocus();
         pb = view.findViewById(R.id.pb);
         test = view.findViewById(R.id.test);
         RecyclerView rvMovie = view.findViewById(R.id.rv_movie);
@@ -51,6 +58,7 @@ public class MoviesFragment extends Fragment {
 
         rvMovie.setVisibility(View.GONE);
         pb.setVisibility(View.VISIBLE);
+
 
         Call<DataResponseMovie> client = ApiConfig.getApiService().getMovie(ApiConfig.getApiKey());
         client.enqueue(new Callback<DataResponseMovie>() {
@@ -76,6 +84,36 @@ public class MoviesFragment extends Fragment {
                 rvMovie.setVisibility(View.GONE);
                 test.setVisibility(View.VISIBLE);
                 Log.e("MainActivity", "onFailure: " + t.getMessage());
+            }
+        });
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return true;
+            }
+
+            private void filterList(String newText) {
+                MovieAdapter adapter = new MovieAdapter(movieResponses);
+                newText = newText.toLowerCase();
+                ArrayList<MovieResponse> itemFilter = new ArrayList<>();
+                for (MovieResponse response : movieResponses) {
+                    String judul = response.getJudul().toLowerCase();
+                    if (judul.contains(newText)){
+                        itemFilter.add(response);
+//                        System.out.println("yuhui"+itemFilter);
+//                        movieAdapter.setFilter(itemFilter);
+                    }if (itemFilter.isEmpty()){
+                        continue;
+                    } else{
+                        rvMovie.setAdapter(adapter);
+                    }
+                }
             }
         });
     }

@@ -17,11 +17,12 @@ import com.example.finalproject.Data_API.MovieResponse;
 import com.example.finalproject.DetailActivity;
 import com.example.finalproject.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
-    private final List<MovieResponse> movieResponses;
+    private List<MovieResponse> movieResponses;
 
     public MovieAdapter(List<MovieResponse> movieResponses){
         this.movieResponses = movieResponses;
@@ -84,5 +85,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             tv_tahun = itemView.findViewById(R.id.tv_tahun);
             ly_movie_tvshow = itemView.findViewById(R.id.movie_tvshow);
         }
+    }
+    public void setFilter(ArrayList<MovieResponse> filter){
+        this.movieResponses = filter;
+        notifyDataSetChanged();
     }
 }
