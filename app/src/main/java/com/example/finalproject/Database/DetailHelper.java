@@ -7,6 +7,8 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.finalproject.Data_API.MovieResponse;
+
 import java.util.ArrayList;
 
 public class DetailHelper {
@@ -14,7 +16,7 @@ public class DetailHelper {
     private static DatabaseHelper databaseHelper;
     private static SQLiteDatabase database;
     private static volatile DetailHelper INSTANCE;
-    private DetailHelper(Context context) {
+    public DetailHelper(Context context) {
         databaseHelper = new DatabaseHelper(context);
     }
     public static DetailHelper getInstance(Context context) {
@@ -70,17 +72,13 @@ public class DetailHelper {
         return database.delete(DATABASE_TABLE, DatabaseContract.DetailColumns._ID + " = "
                 + id, null);
     }
-    public static boolean cari (String text){
+    public boolean isFav(String judul) {
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
-        String query = "SELECT * FROM " + DatabaseContract.TABLE_NAME + " WHERE " + DatabaseContract.DetailColumns.JUDUL + " LIKE '" + text + "%'";
+        String query = "SELECT * FROM " + DatabaseContract.TABLE_NAME + " WHERE " + DatabaseContract.DetailColumns.JUDUL + " LIKE '" + judul + "%'";
         Cursor cursor = db.rawQuery(query, null);
-        boolean hasil = false;
-        if (cursor != null && cursor.getCount() > 0) {
-            hasil = true;
-        }
-        if (cursor != null) {
-            cursor.close();
-        }
-        return hasil;
+        boolean isFav = cursor.getCount() > 0;
+        cursor.close();
+        db.close();
+        return isFav;
     }
 }

@@ -33,6 +33,8 @@ public class DetailActivity extends AppCompatActivity {
     public static final String EXTRA_POSTER = "extra_poster";
     public static final String EXTRA_BACK = "extra_back";
 
+    ArrayList<MovieResponse> movieResponses;
+
     private DetailHelper detailHelper;
     private Detail detail;
 
@@ -60,8 +62,9 @@ public class DetailActivity extends AppCompatActivity {
         String d_vote = getIntent().getStringExtra(EXTRA_VOTE);
         String d_release = getIntent().getStringExtra(EXTRA_RELEASE);
 
-//        boolean hasil = DetailHelper.cari(String.valueOf(d_judul));
-//        isFavorit = hasil;
+        DetailHelper db = new DetailHelper(getApplicationContext());
+        isFavorit = db.isFav(d_judul);
+
 
         detailHelper = DetailHelper.getInstance(getApplicationContext());
         detailHelper.open();
@@ -100,6 +103,11 @@ public class DetailActivity extends AppCompatActivity {
         kembali.setOnClickListener(view -> {
             finish();
         });
+        if (isFavorit){
+            fav.setImageDrawable(getResources().getDrawable(R.drawable.baseline_favorite_24));
+        }else {
+            fav.setImageDrawable(getResources().getDrawable(R.drawable.baseline_favorite_border_24));
+        }
         fav.setOnClickListener(view -> {
             isFavorit = !isFavorit;
             if (isFavorit == true){
@@ -126,27 +134,32 @@ public class DetailActivity extends AppCompatActivity {
                 values.put(String.valueOf(DatabaseContract.DetailColumns.VOTE), d_vote);
 
                 long result = detailHelper.insert(values);
+                System.out.println(result+"Yuhuiii");
                 if (result > 0) {
                     detail.setId((int) result);
-                    Toast.makeText(this, "Berhasil Menambahkan " + d_judul +  " ke Favorite", Toast.LENGTH_SHORT).show();
                     fav.setImageDrawable(getResources().getDrawable(R.drawable.baseline_favorite_24));
+                    Toast.makeText(this, "Berhasil Menambahkan " + d_judul +  " ke Favorite", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(this, "Failed to add data", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Gagal menambahkan data", Toast.LENGTH_SHORT).show();
                 }
             }else {
-                hapus();
+                long result = detailHelper.deleteById(String.valueOf(detail.getId()));
+                if (result > 0){
+                    Toast.makeText(this, "Berhasil Menghapus "+ d_judul + " dari Favorit", Toast.LENGTH_SHORT).show();
+                    fav.setImageDrawable(getResources().getDrawable(R.drawable.baseline_favorite_border_24));
+                }else {
+                    Toast.makeText(this, "Gagal menghapus data", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
 
-    private void hapus() {
-        long result = detailHelper.deleteById(String.valueOf(detail.getId()));
-        if (result > 0) {
-            String d_judul = getIntent().getStringExtra(EXTRA_JUDUL);
-            Toast.makeText(this, "Berhasil Menghapus "+ d_judul + " dari Favorit", Toast.LENGTH_SHORT).show();
-            fav.setImageDrawable(getResources().getDrawable(R.drawable.baseline_favorite_border_24));
-        } else {
-            Toast.makeText(this, "Failed to delete data", Toast.LENGTH_SHORT).show();
-        }
-    }
+//    private void setFav(boolean isFavorit) {
+//        if (isFavorit) {
+//            fav.setImageDrawable(getResources().getDrawable(R.drawable.baseline_favorite_24));
+//        }else {
+//            fav.setImageDrawable(getResources().getDrawable(R.drawable.baseline_favorite_border_24));
+//        }
+//    }
+
 }

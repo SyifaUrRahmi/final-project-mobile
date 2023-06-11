@@ -104,7 +104,7 @@ public class Detail implements Parcelable {
         this.jenis = jenis;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
