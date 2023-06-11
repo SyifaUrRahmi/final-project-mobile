@@ -60,12 +60,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginHorizontal="80dp">
+            android:layout_marginHorizontal="90dp">
             <ImageView
                 android:padding="2dp"
                 android:gravity="center"
                 android:id="@+id/tv_show"
-                android:layout_width="60dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/baseline_tv"
                 />
@@ -73,6 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Tv Shows"
+                android:gravity="center"
                 android:textColor="@color/white"/>
         </LinearLayout>
         <LinearLayout

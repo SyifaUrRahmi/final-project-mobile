@@ -12,10 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import androidx.appcompat.widget.SearchView;
 import android.widget.TextView;
 
 import com.example.finalproject.Adapter.FavoriteAdapter;
@@ -32,7 +34,11 @@ import java.util.concurrent.Executors;
 
 public class FavoritesFragment extends Fragment {
     RecyclerView rvFavorite;
+
+    ArrayList<Detail> hasil = new ArrayList<>();
     TextView belum_ada;
+    SearchView searchView;
+    DetailHelper detailHelper;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +59,34 @@ public class FavoritesFragment extends Fragment {
         new LoadNotesAsync(getContext(), details -> {
             showCurrentDetail(details);
         }).execute();
+
+        searchView = view.findViewById(R.id.cari_);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                searchData(s);
+                return true;
+            }
+        });
+    }
+
+    private void searchData(String text) {
+        if (!TextUtils.isEmpty(text)) {
+            hasil = detailHelper.cari(text);
+            if(hasil != null){
+                belum_ada.setText("Data yang Anda cari tidak ditemukan");
+                showCurrentDetail(hasil);
+            }
+        } else {
+            new LoadNotesAsync(getContext(), notes -> {
+                showCurrentDetail(notes);
+            }).execute();
+        }
     }
 
     private void showCurrentDetail(ArrayList<Detail> details) {

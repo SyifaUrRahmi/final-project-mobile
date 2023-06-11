@@ -81,4 +81,36 @@ public class DetailHelper {
         db.close();
         return isFav;
     }
+    public static ArrayList<Detail> cari(String text){
+        ArrayList<Detail> hasil = new ArrayList<>();
+
+        SQLiteDatabase db = databaseHelper.getReadableDatabase();
+        String query = "SELECT * FROM " + DatabaseContract.TABLE_NAME + " WHERE " + DatabaseContract.DetailColumns.JUDUL + " LIKE '" + text + "%'";
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor != null && cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                Detail detail = getNotesFromCursor(cursor);
+                hasil.add(detail);
+            }
+        }
+        if (cursor != null) {
+            cursor.close();
+        }
+        return hasil;
+    }
+    private static Detail getNotesFromCursor(Cursor cursor) {
+        Detail detail = new Detail();
+        detail.setId(cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseContract.DetailColumns._ID)));
+        detail.setId_(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.DetailColumns.ID_)));
+        detail.setJudul(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.DetailColumns.JUDUL)));
+        detail.setVote(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.DetailColumns.VOTE)));
+        detail.setWaktu(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.DetailColumns.WAKTU)));
+        detail.setJenis(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.DetailColumns.JENIS)));
+        detail.setPoster(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.DetailColumns.POSTER)));
+        detail.setBackdrop(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.DetailColumns.BACKDROP)));
+        detail.setSinopsis(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.DetailColumns.SINOPSIS)));
+        return detail;
+    }
+
 }
