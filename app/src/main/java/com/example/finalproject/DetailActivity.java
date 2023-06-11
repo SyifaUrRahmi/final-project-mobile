@@ -101,7 +101,9 @@ public class DetailActivity extends AppCompatActivity {
                 .load(d_poster)
                 .into(poster);
         kembali.setOnClickListener(view -> {
+            Intent intent = new Intent();
             finish();
+            setResult(RESULT_OK, intent);
         });
         if (isFavorit){
             fav.setImageDrawable(getResources().getDrawable(R.drawable.baseline_favorite_24));
@@ -134,7 +136,6 @@ public class DetailActivity extends AppCompatActivity {
                 values.put(String.valueOf(DatabaseContract.DetailColumns.VOTE), d_vote);
 
                 long result = detailHelper.insert(values);
-                System.out.println(result+"Yuhuiii");
                 if (result > 0) {
                     detail.setId((int) result);
                     fav.setImageDrawable(getResources().getDrawable(R.drawable.baseline_favorite_24));
@@ -143,7 +144,7 @@ public class DetailActivity extends AppCompatActivity {
                     Toast.makeText(this, "Gagal menambahkan data", Toast.LENGTH_SHORT).show();
                 }
             }else {
-                long result = detailHelper.deleteById(String.valueOf(detail.getId()));
+                long result = detailHelper.deleteByJudul(d_judul);
                 if (result > 0){
                     Toast.makeText(this, "Berhasil Menghapus "+ d_judul + " dari Favorit", Toast.LENGTH_SHORT).show();
                     fav.setImageDrawable(getResources().getDrawable(R.drawable.baseline_favorite_border_24));

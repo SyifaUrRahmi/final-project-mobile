@@ -7,7 +7,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_fav"
         android:layout_width="match_parent"
-        android:layout_height="78dp"
+        android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
         android:layout_margin="10dp">
         <RelativeLayout
@@ -16,7 +16,7 @@
             <ImageView
                 android:id="@+id/post"
                 android:layout_width="70dp"
-                android:layout_height="78dp"
+                android:layout_height="95dp"
                 android:src="@drawable/bunga"
                 android:scaleType="centerCrop"/>
             <LinearLayout
@@ -31,7 +31,7 @@
                     android:paddingStart="10dp"
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
-                    android:text="judul"/>
+                    android:text="@string/judul"/>
             <LinearLayout
                 android:layout_marginStart="10dp"
                 android:layout_width="match_parent"

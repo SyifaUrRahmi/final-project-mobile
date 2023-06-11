@@ -68,9 +68,9 @@ public class DetailHelper {
         return database.update(DATABASE_TABLE, values, DatabaseContract.DetailColumns._ID
                 + " = ?", new String[]{id});
     }
-    public int deleteById(String id) {
-        return database.delete(DATABASE_TABLE, DatabaseContract.DetailColumns._ID + " = "
-                + id, null);
+    public int deleteByJudul(String judul) {
+        return database.delete(DATABASE_TABLE, DatabaseContract.DetailColumns.JUDUL + " LIKE '"
+                + judul + "%'", null);
     }
     public boolean isFav(String judul) {
         SQLiteDatabase db = databaseHelper.getReadableDatabase();

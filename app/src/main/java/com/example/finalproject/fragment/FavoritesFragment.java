@@ -24,19 +24,14 @@ import com.example.finalproject.Database.DetailHelper;
 import com.example.finalproject.Database.MappingHelper;
 import com.example.finalproject.R;
 
-import org.w3c.dom.Text;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class FavoritesFragment extends Fragment {
-
-    ArrayList<Detail> details = new ArrayList<>();
     RecyclerView rvFavorite;
-    ArrayList<Detail> detail;
     TextView belum_ada;
 
     @Override
@@ -55,14 +50,13 @@ public class FavoritesFragment extends Fragment {
 
         belum_ada = view.findViewById(R.id.belum_ada);
 
-
         new LoadNotesAsync(getContext(), details -> {
             showCurrentDetail(details);
         }).execute();
     }
 
     private void showCurrentDetail(ArrayList<Detail> details) {
-        if (details != null) {
+        if (!details.isEmpty()) {
             rvFavorite.setVisibility(View.VISIBLE);
             belum_ada.setVisibility(View.GONE);
             rvFavorite.setLayoutManager(new LinearLayoutManager(getContext()));
