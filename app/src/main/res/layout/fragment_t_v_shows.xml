@@ -5,6 +5,12 @@
     android:layout_height="match_parent"
     tools:context=".fragment.MoviesFragment"
     android:layout_marginHorizontal="10dp">
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/cari_"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_cari"/>
     <ProgressBar
         android:id="@+id/pb"
         android:layout_width="match_parent"
@@ -23,6 +29,7 @@
             android:visibility="gone"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_tvshow"
+        android:layout_marginTop="60dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:listitem="@layout/item_movie_tvshow"/>

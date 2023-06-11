@@ -106,8 +106,7 @@ public class MoviesFragment extends Fragment {
                     String judul = response.getJudul().toLowerCase();
                     if (judul.contains(newText)){
                         itemFilter.add(response);
-//                        System.out.println("yuhui"+itemFilter);
-//                        movieAdapter.setFilter(itemFilter);
+                        adapter.setFilter(itemFilter);
                     }if (itemFilter.isEmpty()){
                         continue;
                     } else{

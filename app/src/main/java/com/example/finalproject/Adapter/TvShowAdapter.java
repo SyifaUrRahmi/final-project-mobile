@@ -13,15 +13,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.finalproject.Data_API.MovieResponse;
 import com.example.finalproject.Data_API.TvShowResponse;
 import com.example.finalproject.DetailActivity;
 import com.example.finalproject.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.ViewHolder> {
 
-    private final List<TvShowResponse> tvShowResponses;
+    private List<TvShowResponse> tvShowResponses;
 
     public TvShowAdapter(List<TvShowResponse> tvShowResponses) {
         this.tvShowResponses = tvShowResponses;
@@ -87,5 +89,9 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.ViewHolder
             tv_tahun = itemView.findViewById(R.id.tv_tahun);
             ly_tvshow = itemView.findViewById(R.id.movie_tvshow);
         }
+    }
+    public void setFilter(ArrayList<TvShowResponse> filter){
+        this.tvShowResponses = filter;
+        notifyDataSetChanged();
     }
 }
