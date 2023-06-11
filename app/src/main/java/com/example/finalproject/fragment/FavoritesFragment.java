@@ -1,12 +1,15 @@
 package com.example.finalproject.fragment;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import androidx.appcompat.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.finalproject.Adapter.FavoriteAdapter;
 import com.example.finalproject.Database.Detail;
@@ -36,7 +40,7 @@ public class FavoritesFragment extends Fragment {
     RecyclerView rvFavorite;
 
     ArrayList<Detail> hasil = new ArrayList<>();
-    TextView belum_ada;
+    TextView belum_ada, hapus;
     SearchView searchView;
     DetailHelper detailHelper;
 
@@ -55,6 +59,10 @@ public class FavoritesFragment extends Fragment {
         rvFavorite.setHasFixedSize(true);
 
         belum_ada = view.findViewById(R.id.belum_ada);
+        hapus = view.findViewById(R.id.hapus);
+
+        detailHelper = DetailHelper.getInstance(getContext());
+        detailHelper.open();
 
         new LoadNotesAsync(getContext(), details -> {
             showCurrentDetail(details);
@@ -73,6 +81,10 @@ public class FavoritesFragment extends Fragment {
                 return true;
             }
         });
+
+        hapus.setOnClickListener(view1 -> {
+            onBackPressed();
+        });
     }
 
     private void searchData(String text) {
@@ -81,8 +93,11 @@ public class FavoritesFragment extends Fragment {
             if(hasil != null){
                 belum_ada.setText("Data yang Anda cari tidak ditemukan");
                 showCurrentDetail(hasil);
+            }else{
+                belum_ada.setText("Anda belum menyukai film apapun");
             }
         } else {
+            belum_ada.setText("Anda belum menyukai film apapun");
             new LoadNotesAsync(getContext(), notes -> {
                 showCurrentDetail(notes);
             }).execute();
@@ -93,11 +108,13 @@ public class FavoritesFragment extends Fragment {
         if (!details.isEmpty()) {
             rvFavorite.setVisibility(View.VISIBLE);
             belum_ada.setVisibility(View.GONE);
+            hapus.setVisibility(View.VISIBLE);
             rvFavorite.setLayoutManager(new LinearLayoutManager(getContext()));
             FavoriteAdapter adapter = new FavoriteAdapter(details);
             rvFavorite.setAdapter(adapter);
         } else {
             belum_ada.setVisibility(View.VISIBLE);
+            hapus.setVisibility(View.GONE);
             rvFavorite.setVisibility(View.GONE);
         }
     }
@@ -131,5 +148,32 @@ public class FavoritesFragment extends Fragment {
 
     interface LoadNotesCallback {
         void postExecute(ArrayList<Detail> details);
+    }
+
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage("Apakah Anda yakin?");
+
+        builder.setTitle("Alert!");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Ya", (DialogInterface.OnClickListener) (dialog, which) -> {
+            detailHelper.hapus();
+            hapus.setVisibility(View.GONE);
+            Toast.makeText(getContext(), "Berhasil Menghapus semua data dari Favorit", Toast.LENGTH_SHORT).show();
+            FavoritesFragment favoritesFragment = new FavoritesFragment();
+            FragmentManager fragmentManager = getParentFragmentManager();
+            fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.frame_container, favoritesFragment,
+                            FavoritesFragment.class.getSimpleName())
+                    .addToBackStack(null)
+                    .commit();
+        dialog.cancel();
+        });
+        builder.setNegativeButton("Tidak", (DialogInterface.OnClickListener) (dialog, which) -> {
+            dialog.cancel();
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }

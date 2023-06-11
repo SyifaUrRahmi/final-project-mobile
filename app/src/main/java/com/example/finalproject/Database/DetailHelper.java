@@ -1,5 +1,7 @@
 package com.example.finalproject.Database;
 
+import static com.example.finalproject.Database.DatabaseContract.TABLE_NAME;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -7,12 +9,10 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.finalproject.Data_API.MovieResponse;
-
 import java.util.ArrayList;
 
 public class DetailHelper {
-    private static final String DATABASE_TABLE = DatabaseContract.TABLE_NAME;
+    private static final String DATABASE_TABLE = TABLE_NAME;
     private static DatabaseHelper databaseHelper;
     private static SQLiteDatabase database;
     private static volatile DetailHelper INSTANCE;
@@ -72,9 +72,14 @@ public class DetailHelper {
         return database.delete(DATABASE_TABLE, DatabaseContract.DetailColumns.ID_ + " LIKE '"
                 + id_ + "%'", null);
     }
+    public void hapus() {
+    SQLiteDatabase db = databaseHelper.getReadableDatabase();;
+    db.delete(TABLE_NAME,null,null);
+    db.close();
+    }
     public boolean isFav(String id_) {
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
-        String query = "SELECT * FROM " + DatabaseContract.TABLE_NAME + " WHERE " + DatabaseContract.DetailColumns.ID_ + " LIKE '" + id_ + "%'";
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + DatabaseContract.DetailColumns.ID_ + " LIKE '" + id_ + "%'";
         Cursor cursor = db.rawQuery(query, null);
         boolean isFav = cursor.getCount() > 0;
         cursor.close();
@@ -85,7 +90,7 @@ public class DetailHelper {
         ArrayList<Detail> hasil = new ArrayList<>();
 
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
-        String query = "SELECT * FROM " + DatabaseContract.TABLE_NAME + " WHERE " + DatabaseContract.DetailColumns.JUDUL + " LIKE '" + text + "%'";
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + DatabaseContract.DetailColumns.JUDUL + " LIKE '" + text + "%'";
         Cursor cursor = db.rawQuery(query, null);
 
         if (cursor != null && cursor.getCount() > 0) {
