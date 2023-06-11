@@ -49,6 +49,8 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.ViewHolder
         String[] tahun = release.split("-");
         holder.tv_judul.setText(tvShowResponse.getJudul());
         holder.tv_tahun.setText(tahun[0]);
+        double vote_ = Double.parseDouble(vote);
+        holder.vote.setText(String.valueOf(vote_));
         String poster_path = "https://image.tmdb.org/t/p/w500"+tvShowResponse.getPoster();
         Glide.with(holder.itemView.getContext())
                 .load(poster_path)
@@ -80,7 +82,7 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView iv_gambar;
-        TextView tv_judul, tv_tahun;
+        TextView tv_judul, tv_tahun, vote;
         LinearLayout ly_tvshow;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -88,6 +90,7 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.ViewHolder
             tv_judul = itemView.findViewById(R.id.tv_judul);
             tv_tahun = itemView.findViewById(R.id.tv_tahun);
             ly_tvshow = itemView.findViewById(R.id.movie_tvshow);
+            vote = itemView.findViewById(R.id.vote);
         }
     }
     public void setFilter(ArrayList<TvShowResponse> filter){

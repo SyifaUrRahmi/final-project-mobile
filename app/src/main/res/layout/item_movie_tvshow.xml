@@ -25,7 +25,7 @@
                 android:layout_below="@+id/iv_gambar"
                 android:orientation="vertical">
                 <TextView
-                    android:paddingTop="7dp"
+                    android:paddingTop="10dp"
                     android:id="@+id/tv_judul"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:text="Judul"
-                    android:paddingHorizontal="5dp"
+                    android:paddingHorizontal="10dp"
                     android:ellipsize="end"
                     android:maxLines="1"/>
                 <TextView
@@ -44,7 +44,18 @@
                     android:gravity="center"
                     android:text="2000"/>
             </LinearLayout>
-
+            <TextView
+                android:id="@+id/vote"
+                android:background="@drawable/bg_lingkaran_kuning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="205dp"
+                android:textSize="20dp"
+                android:padding="7dp"
+                android:text="2.0"
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>

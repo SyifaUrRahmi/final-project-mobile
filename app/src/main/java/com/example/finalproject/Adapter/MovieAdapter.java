@@ -46,6 +46,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         String vote = String.valueOf(movieResponse.getVote());
         String backdrop = "https://image.tmdb.org/t/p/w500"+movieResponse.getBackdrop();
         String[] tahun = release.split("-");
+        double vote_ = Double.parseDouble(vote);
+        holder.vote.setText(String.valueOf(vote_));
         holder.tv_judul.setText(movieResponse.getJudul());
         holder.tv_tahun.setText(tahun[0]);
         String poster_path = "https://image.tmdb.org/t/p/w500"+movieResponse.getPoster();
@@ -78,13 +80,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView iv_gambar;
-        TextView tv_judul, tv_tahun;
+        TextView tv_judul, tv_tahun, vote;
         LinearLayout ly_movie_tvshow;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             iv_gambar = itemView.findViewById(R.id.iv_gambar);
             tv_judul = itemView.findViewById(R.id.tv_judul);
             tv_tahun = itemView.findViewById(R.id.tv_tahun);
+            vote = itemView.findViewById(R.id.vote);
             ly_movie_tvshow = itemView.findViewById(R.id.movie_tvshow);
         }
     }
